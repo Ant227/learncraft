@@ -114,6 +114,7 @@ class ModuleSelectionPage extends StatelessWidget {
                   ),
                 ],
               ),
+              //color
               child: Stack(
                 children: [
                   Align(
