@@ -34,6 +34,9 @@ class LearnCraftApp extends StatelessWidget {
         fontFamily: 'Montserrat',
         useMaterial3: true,
         colorSchemeSeed: const Color(0xFF5C4DFF),
+        appBarTheme: AppBarTheme(
+          color: Colors.white,
+        ),
       ),
       initialRoute: '/',
       routes: {
