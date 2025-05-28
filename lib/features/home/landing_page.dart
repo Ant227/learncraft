@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
@@ -16,10 +17,7 @@ class LandingPage extends StatelessWidget {
             Center(
               child: Column(
                 children: [
-                  Image.asset(
-                    'assets/images/logo.png', // Replace with your asset
-                    height: 120,
-                  ),
+                  SvgPicture.asset('assets/images/logo.svg', height: 120),
                   const SizedBox(height: 20),
                   const Text(
                     'LearnCraft',
@@ -57,7 +55,10 @@ class LandingPage extends StatelessWidget {
                   ),
                   child: const Text(
                     'Get Started',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
