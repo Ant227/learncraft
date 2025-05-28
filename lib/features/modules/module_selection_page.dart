@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 import '../lesson_list/literacy_lessons_page.dart';
 
@@ -12,7 +13,8 @@ class ModuleSelectionPage extends StatelessWidget {
         'title': 'Literacy Skills',
         'desc': 'Reading and writing for a better learning.',
         'status': 'Not Started',
-        'color': Colors.redAccent,
+        'color': Color(0xFFCF2236),
+        'textColor': Color(0xFF550A0A),
         'border': Color(0xFFECECEC),
         'image': 'assets/images/literacy_skills.png',
       },
@@ -20,7 +22,8 @@ class ModuleSelectionPage extends StatelessWidget {
         'title': 'Numeracy Skills',
         'desc': 'Use math to solve daily problems.',
         'status': 'Not Started',
-        'color': Colors.blueAccent,
+        'color': Color(0xFF228ACF),
+        'textColor': Color(0xFF0D0F57),
         'border': Color(0xFFECECEC),
         'image': 'assets/images/numeracy.png',
       },
@@ -28,7 +31,8 @@ class ModuleSelectionPage extends StatelessWidget {
         'title': 'Thai Speaking',
         'desc': 'Speak Thai for everyday use',
         'status': '78%',
-        'color': Colors.orangeAccent,
+        'color': Color(0xFFFF9934),
+        'textColor': Color(0xFF550A0A),
         'border': Color(0xFFECECEC),
         'image': 'assets/images/thai_speaking.png',
       },
@@ -36,7 +40,8 @@ class ModuleSelectionPage extends StatelessWidget {
         'title': 'Life Skill',
         'desc': 'Everyday skills for work, health and life.',
         'status': 'Completed',
-        'color': Colors.purple,
+        'color': Color(0xFFCF22CF),
+        'textColor': Color(0xFF240A55),
         'border': Color(0xFFECECEC),
         'image': 'assets/images/life_skill.png',
       },
@@ -45,8 +50,12 @@ class ModuleSelectionPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text("Welcome Ant, select a course."),
-        centerTitle: true,
+        title: const Text(
+          "👋 Welcome Ant, select a course.",
+          style: TextStyle(
+            fontSize: 15,
+          ),
+        ),
       ),
       body: ListView.separated(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
@@ -68,27 +77,67 @@ class ModuleSelectionPage extends StatelessWidget {
                 Navigator.pushNamed(context, '/life');
               }
             },
-
             child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(color: module['border'] as Color),
-                borderRadius: BorderRadius.circular(16),
+              width: double.infinity,
+              height: 130,
+              decoration: ShapeDecoration(
+                shape: RoundedSuperellipseBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  side: BorderSide(
+                    color: Color(0xFFECECEC).withAlpha(100),
+                  ),
+                ),
+                gradient: LinearGradient(
+                  colors: [
+                    (module['color'] as Color).withAlpha(30),
+                    (module['color'] as Color).withAlpha(20),
+                    (module['color'] as Color).withAlpha(10),
+                    Color(0xFFFFFFFF).withAlpha(10),
+                    Color(0xFFFFFFFF).withAlpha(10),
+                    Color(0xFFFFFFFF).withAlpha(10),
+                  ],
+                ),
+                shadows: [
+                  BoxShadow(
+                    offset: const Offset(0, 0),
+                    blurRadius: 1,
+                    spreadRadius: 0.1,
+                    color: Colors.black.withAlpha(70),
+                  ),
+                  BoxShadow(
+                    color: Color(0xFFF4ECEC),
+                  ),
+                  BoxShadow(
+                    offset: const Offset(0, -3),
+                    blurRadius: 2,
+                    color: Colors.white,
+                  ),
+                ],
               ),
-              padding: const EdgeInsets.all(16),
-              child: Row(
+              child: Stack(
                 children: [
-                  // Left: Text section
-                  Expanded(
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Opacity(
+                        opacity: 0.2,
+                        child: Image.asset(module['image'] as String),
+                      ),
+                    ),
+                  ),
+
+                  Padding(
+                    padding: EdgeInsets.all(16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           module['title'] as String,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w800,
+                            color: module['textColor'] as Color,
                           ),
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
@@ -96,9 +145,10 @@ class ModuleSelectionPage extends StatelessWidget {
                         const SizedBox(height: 6),
                         Text(
                           module['desc'] as String,
-                          style: const TextStyle(
-                            fontSize: 14,
-                            color: Colors.black54,
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w300,
                           ),
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
@@ -110,7 +160,9 @@ class ModuleSelectionPage extends StatelessWidget {
                             vertical: 4,
                           ),
                           decoration: BoxDecoration(
-                            color: (module['color'] as Color).withOpacity(0.1),
+                            color: (module['color'] as Color).withOpacity(
+                              0.1,
+                            ),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Text(
@@ -125,17 +177,6 @@ class ModuleSelectionPage extends StatelessWidget {
                           ),
                         ),
                       ],
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  // Right: Image
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
-                    child: Image.asset(
-                      module['image'] as String,
-                      width: 60,
-                      height: 60,
-                      fit: BoxFit.cover,
                     ),
                   ),
                 ],

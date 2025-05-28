@@ -42,7 +42,7 @@ class LandingPage extends StatelessWidget {
                 height: 50,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(
+                    Navigator.pushReplacementNamed(
                       context,
                       '/modules',
                     ); // make sure this route exists
