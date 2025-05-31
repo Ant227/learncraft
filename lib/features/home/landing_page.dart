@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:learncraft/features/modules/module_selection_page.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
@@ -42,10 +43,12 @@ class LandingPage extends StatelessWidget {
                 height: 50,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pushReplacementNamed(
+                    Navigator.push(
                       context,
-                      '/modules',
-                    ); // make sure this route exists
+                      MaterialPageRoute(
+                        builder: (context) => ModuleSelectionPage(),
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF5C4DFF),
